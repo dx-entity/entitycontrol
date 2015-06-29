@@ -1,17 +1,19 @@
 from stompy.simple import Client
 
-class MessageSender():
-    '''
+class MessageSender(object):
+    """
     message Sender
-    '''
+    """
 
-    def __init__(self,conf):
-        pass
-
-    def getConn(self,conf):
-        self.client = Client()
-        self.conn = self.client.connect()
+    def __init__(self, conf):
+        self.mq_server = conf.getConfig('mq_server')
+        self.ec2mcu = conf.getConfig('ec2mcu')
+        self.mcu2ec = conf.getConfig('mcu2ec')
+        self.mcu2ec_allive = conf.getConfig('mcu2ec_allive')
+        self.ec2mcu_allive = conf.getConfig('ec2mcu_allive')
         
-    
     def sendMessage(self, msg):
-        pass
+        client = Client('mqserver', 61613)
+        client.connect()
+        print msg
+        client.put(msg, self.ec2mcu)

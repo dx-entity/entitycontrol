@@ -3,7 +3,7 @@ from EntityControl.MessageAdapter import MessageSender as ms
 
 class BaseMsgHandler():
     def __init__(self, msg):
-        pass    
+        self.heartResponse = None
     
     def doAction(self):
         pass

@@ -6,9 +6,11 @@ class Single(type):
         super(Single, cls).__init__(name, bases, dict)
         cls._instance = None  
         
-    def __call__(cls, *args, **kw):  
-        if cls._instance is None:  
+    def __call__(cls, *args, **kw):
+        if cls._instance is None:
             cls._instance = super(Single, cls).__call__(*args, **kw)
+            # print cls.__name__, cls._instance
+
         return cls._instance          
     pass
 
@@ -21,8 +23,8 @@ class GlobalDevice(object):
     __metaclass__ = Single   #  singleton
     
     def __init__(self):
-        self.name_device={}         #store device , key: uuid, value: instence of dev
-        self.caseID_device={}       #store device, key: caseid,value: list of dev belong to this case
+        self.name_device = {}         #store device , key: uuid, value: instence of dev
+        self.caseID_device = {}       #store device, key: caseid,value: list of dev belong to this case
         pass
     
     
@@ -41,7 +43,10 @@ class GlobalDevice(object):
         input name,
         return list of device
         '''
-        pass
+        if self.name_device.has_key(name):
+            return self.name_device[name]
+        else:
+            return None
     
     
     
@@ -72,14 +77,19 @@ class GlobalDevice(object):
         pass
     
     
-    def saveDevByName(self,name):
+    def saveDevByName(self,name,dev):
         '''
         save dev by name
         input name
         return True if delete success else False
         '''
-        pass
-    
+
+        if self.name_device.has_key(name):
+            print 'raise exception : duplicate name device'
+            return False
+        else:
+            self.name_device[name] = dev
+            return True
 
 
 

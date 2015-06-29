@@ -4,10 +4,9 @@ from optparse import OptionParser
 
 import ConfigAnalyser as ca
 from MessageAdapter.MessageListener import *
-import Utils.BaseData as bd
+from Utils.BaseData import BD
 from TrueEntity.Entity import *
-from GlobalData import * 
-
+from GlobalData import *
 
 def main():
 
@@ -29,32 +28,35 @@ def main():
     #0.initial config file
     gd = GlobalDevice()
     gc = GlobalCase()
+    bd = BD()
 
     bd.conf = ca.ConfigAnalyser(options.configFilePath)
     switchlist = bd.conf.getConfig('switchlist')
     #print switchlist
-    # for switch in switchlist:
-    #     data = copy.deepcopy(bd.data)
-    #     data['e_name'] = switch[0]
-    #     data['face'] = switch[1].split(',')[0]
-    #     data['e_ip'] = switch[1].split(',')[1]
-        #print data
-        #print MultiSwitch(data)
-        #ms = MultiSwitch(data)
 
+    # 1.initial all multiswitch
+    for switch in switchlist:
+        data = copy.deepcopy(bd.data)
+        data['e_name'] = switch[0]
+        data['face'] = switch[1].split(',')[0]
+        data['e_ip'] = switch[1].split(',')[1]
+        data['multi_switch'] = True
+        data['e_type'] = 'switch'
+
+        ms = MultiSwitch(data)
+        if ms.testConnection():
+            ms.dealer.selfInit()
+        else:
+            print data['e_name'], "connection test failed"
+    # 2.check the link between switch and server
+
+
+    # 3.prepare to receive msg
     ml = MessageListener(bd.conf)
-    ml.listenMessage()
+    # ml.listenMessage()
+    ml.listenAliveMsg()
 
-    #1.initial all multiswitch
-
-
-    #2.check the link between switch and server
-
-
-    #3.prepare to receive msg
-
-
-    #4.do some cleaning if need
+    # 4.do some cleaning if need
 
 
 main()
