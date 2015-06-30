@@ -19,5 +19,5 @@ class MessageHandlerFactory(object):
         print msg.body
         dealed_msg = json.loads(msg.body)
         tastHandler = handler[dealed_msg['name']]
-        print dir(tastHandler(dealed_msg))
+        # print dir(tastHandler(dealed_msg))
         tastHandler(dealed_msg).returnHeartBeat()

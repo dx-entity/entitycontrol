@@ -53,7 +53,7 @@ def main():
 
     # 3.prepare to receive msg
     ml = MessageListener(bd.conf)
-    # ml.listenMessage()
+    ml.listenMessage()
     ml.listenAliveMsg()
 
     # 4.do some cleaning if need

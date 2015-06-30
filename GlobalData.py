@@ -59,7 +59,7 @@ class GlobalDevice(object):
         pass
     
     
-    def deleteDevByName(self,name):
+    def deleteDevByName(self, name):
         '''
         delete device by name
         input name
@@ -67,23 +67,12 @@ class GlobalDevice(object):
         '''
         pass
     
-    
-    def saveDevByCaseID(self,dev_list,caseid):
-        '''
-        save all the device belong to caseid
-        input caseid, listof device
-        return True if delete success else False 
-        '''        
-        pass
-    
-    
-    def saveDevByName(self,name,dev):
-        '''
+    def saveDevByName(self, name, dev):
+        """
         save dev by name
         input name
         return True if delete success else False
-        '''
-
+        """
         if self.name_device.has_key(name):
             print 'raise exception : duplicate name device'
             return False
@@ -94,36 +83,35 @@ class GlobalDevice(object):
 
 
 class GlobalCase(object):   
-    '''
+    """
     save case data
-    '''
-    
-    
-    __metaclass__ = Single      #  singleton
-    
-    
+    """
+
+    __metaclass__ = Single      # singleton
+
     def __init__(self):
-        self.case_data = {}  #save case data key:caseid value: status
-        
-        pass
-    
-    
+        self.case_data = {}  # save case data key:caseid value: status
+
     def getCase(self, caseid):
-        '''
+        """
         get casedata according to caseid
-        '''
+        """
+        if self.case_data.has_key(caseid):
+            return self.case_data[caseid]
+        else:
+            return None
+    
+    def saveCase(self, case):
+        """
+        save casedata
+        caseid: case
+        """
+        self.case_data[case.caseid] = case
         pass
-    
-    
-    def saveCase(self, caseid):
-        '''
-        save casedata according to caseid
-        '''
-        pass
-    
-    
+
     def delCase(self, caseid):
-        '''
+        """
         remove casedata according to caseid
-        '''
-        pass
+        """
+        assert self.case_data.has_key(caseid)
+        del self.case_data[caseid]

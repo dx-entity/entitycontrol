@@ -22,6 +22,8 @@ class ConfigAnalyser:
         self.user = cf.get('DB', 'user')
         self.passwd = cf.get('DB', 'passwd')
         self.db = cf.get('DB', 'passwd')
+        # nfs configuration
+        self.nfsBaseDir = cf.get('NFS', 'basedir')
 
     def getConfig(self, name):
         dicConfig = {
@@ -34,6 +36,7 @@ class ConfigAnalyser:
             'mcu2ec': self.mcu2ec,
             'mcu2ec_allive': self.mcu2backend_alive,
             'ec2mcu_allive': self.backend2mcu_alive,
-            'mq_server': self.mq_server
+            'mq_server': self.mq_server,
+            'basedir': self.nfsBaseDir
         }
         return dicConfig[name]

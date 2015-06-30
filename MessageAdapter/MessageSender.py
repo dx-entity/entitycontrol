@@ -15,5 +15,6 @@ class MessageSender(object):
     def sendMessage(self, msg):
         client = Client('mqserver', 61613)
         client.connect()
-        print msg
-        client.put(msg, self.ec2mcu)
+        # print msg
+        return client.put(msg, self.ec2mcu)
+        # print self.__class__, res
