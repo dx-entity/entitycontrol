@@ -1,7 +1,8 @@
 from xml.etree import ElementTree as et
 from Utils.BaseData import BD
 from GlobalData import GlobalCase
-from EntityControl.MessageAdapter import MessageSender as ms
+import re
+from MessageAdapter import MessageSender as ms
 
 
 class TaskData(object):
@@ -60,6 +61,7 @@ class Case(object):
 
 class BaseMsgHandler(object):
     def __init__(self, msg):
+        self.devicelist = []
         self.gc = GlobalCase()
         self.bd = BD()
         self.heartResponse = None
@@ -69,14 +71,29 @@ class BaseMsgHandler(object):
         pass
 
     def analyseXML(self):
+        """
+        analyseXML get device list
+        :return:devicelist
+        """
         assert self.msg.has_key('tfile')
         path = self.bd.conf.getConfig('basedir') + self.msg['tfile']
         xmlDoc = et.parse(path)
         root = xmlDoc.getroot()
         topo_stucture = root.getchildren()
+        pattern = re.compile(r"real_.*")
         for node in topo_stucture:
-            
-        print topo_stucture
+            if pattern.match(node.tag):
+                dev = dict(type=node.tag.split('_')[-1],
+                           real_id=node.attrib['real_id'],
+                           link=[])
+                chnodelist = node.getchildren()
+                for ch in chnodelist:
+                    if ch.tag == 'interface':
+                        gchnodelist = ch.getchildren()
+                        for gch in gchnodelist:
+                            if gch.tag == 'link':
+                                dev['link'].append(gch.text)
+                self.devicelist.append(dev)
 
     def returnWithoutHandler(self):
         pass

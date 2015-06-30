@@ -49,5 +49,6 @@ class MultiSwitch(BaseEntity):
 
     def __init__(self, data):
         BaseEntity.__init__(self, data)
-        self.face = data['face']  # value: inner ; outter ;
+        if data.has_key('face'):
+            self.face = data['face']  # value: inner ; outter ;
         self.dealer = factory.H3CActionFactory.H3CSwitch(self)

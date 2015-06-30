@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <link_information>
+    <delay>2</delay>
+    <datarate>56</datarate>
+    <mtu>1400</mtu>
+  </link_information>
+  <id_range min="334186" max="334189"/>
+  <host id="334187">
+    <interface id="0">
+      <link type="real_switch">334186</link>
+      <ip address="default" netmask="default" gateway="default"/>
+    </interface>
+  </host>
+  <host id="334188">
+    <interface id="0">
+      <link type="real_switch">334186</link>
+      <ip address="default" netmask="default" gateway="default"/>
+    </interface>
+  </host>
+  <host id="334189">
+    <interface id="0">
+      <link type="real_switch">334186</link>
+      <ip address="default" netmask="default" gateway="default"/>
+    </interface>
+  </host>
+  <real_switch id="334186" real_id="12">
+    <interface id="0">
+      <link type="host">334188</link>
+      <ip address="default" netmask="default"/>
+    </interface>
+    <interface id="1">
+      <link type="host">334189</link>
+      <ip address="default" netmask="default"/>
+    </interface>
+    <interface id="2">
+      <link type="host">334187</link>
+      <ip address="default" netmask="default"/>
+    </interface>
+  </real_switch>
+</root>
