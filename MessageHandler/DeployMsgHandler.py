@@ -17,6 +17,7 @@ class DeployMsgHandler(BaseMsgHandler):
         # 3.vlan or route
         for device in self.devicelist:
             dev = EntityFactory.getEntity(device)
+            print device
             self.gd.saveDevByName("name", dev)
 
     def initCase(self):
@@ -26,8 +27,9 @@ class DeployMsgHandler(BaseMsgHandler):
         self.gc.saveCase(case)
 
     def doAction(self):
-        '''
+        """
         analyse vlan and provide link
-        '''
+        """
+        print self.__class__.__name__, "deploy message handler"
         self.initCase()
 
