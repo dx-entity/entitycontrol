@@ -14,7 +14,7 @@ def main():
     parser = OptionParser(usage = usage, version="%prog 1.0")
     parser.add_option("-f", "--file", dest="configFilePath",  action="store",
                       help="config file name")
-    parser.add_option("-d","--deamon",dest="runBackEnd", action="store_true", default=False,
+    parser.add_option("-d", "--deamon", dest="runBackEnd", action="store_true", default=False,
                       help="run program as deamon")
 
     (options, args) = parser.parse_args()
@@ -41,7 +41,8 @@ def main():
         data['face'] = switch[1].split(',')[0]
         data['e_ip'] = switch[1].split(',')[1]
         data['multi_switch'] = True
-        data['e_type'] = 'switch'
+        data['type'] = 'switch'
+        print data
 
         ms = MultiSwitch(data)
         if ms.testConnection():

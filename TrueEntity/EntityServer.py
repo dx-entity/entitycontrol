@@ -1,7 +1,7 @@
-import TrueEntity
+from Entity import BaseEntity
 
 
 
-class EntityServer(TrueEntity):
+class EntityServer(BaseEntity):
     def __init__(self):
         pass

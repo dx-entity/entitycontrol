@@ -6,7 +6,7 @@ import json
 import time
 
 class MessageHandlerFactory(object):
-    
+
     @staticmethod
     def getMsgHandler(msg):
         handler = {
@@ -20,4 +20,4 @@ class MessageHandlerFactory(object):
         dealed_msg = json.loads(msg.body)
         tastHandler = handler[dealed_msg['name']]
         # print dir(tastHandler(dealed_msg))
-        tastHandler(dealed_msg).returnHeartBeat()
+        tastHandler(dealed_msg).doAction()

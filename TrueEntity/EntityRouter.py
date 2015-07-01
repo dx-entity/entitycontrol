@@ -1,5 +1,5 @@
-import TrueEntity
+from Entity import BaseEntity
 
-class EntityRouter(TrueEntity):
-    def __init__(self):
+class EntityRouter(BaseEntity):
+    def __init__(self, data):
         pass

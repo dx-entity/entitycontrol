@@ -12,6 +12,9 @@ class HeartBeatMsgHandler(BaseMsgHandler):
         # print self.__class__, msg
         self.heartResponse = dict(id=msg['id'], name=msg['name'], type='real', ipaddr=msg['ipaddr'])
 
+    def doAction(self):
+        self.returnHeartBeat()
+
     def returnHeartBeat(self):
         """
         send response

@@ -6,9 +6,9 @@ class BD:
     __metaclass__ = Single
     
     def __init__(self):
-        self.data = dict(entity_id='', e_type='', e_name='', e_sn='', e_ip='', e_uname='admin', e_passwd='iiecas',
+        self.data = dict(entity_id='', type='', e_name='', e_sn='', e_ip='', e_uname='admin', e_passwd='iiecas',
                  e_isSnmp=False, community_w='iiecas_testwrite', community_r='iiecas_testread', caseid='', service=[],
-                 multi_switch=False)
+                 multi_switch=False,real_id=-1)
 
         self.conf = None  # configAnalyser instance
 

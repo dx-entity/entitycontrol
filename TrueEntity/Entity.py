@@ -9,19 +9,8 @@ class BaseEntity(object):
     """
 
     def __init__(self, data):
-        self.entity_id = data['entity_id']
-        self.e_type = data['e_type']
-        self.name = data['e_name']
-        self.sn = data['e_sn']
-        self.ip = data['e_ip']
-        self.uname = data['e_uname']
-        self.passwd = data['e_passwd']
-        self.isSnmp = data['e_isSnmp']  # a bool
-        self.service = data['service']  # a list of service
-        self.caseid = data['caseid']
-        self.community_w = data['community_w']
-        self.community_r = data['community_r']
-        self.multi_switch = data['multi_switch']
+        self.e_type = data['type']
+        self.real_id = data['real_id'] if data['real_id'] else -1
 
     def testConnection(self):
         """
@@ -41,6 +30,11 @@ class BaseEntity(object):
         """
         pass
 
+    def selfinit(self):
+        """
+        init dev according to realid
+        """
+        pass
 
 class MultiSwitch(BaseEntity):
     """
@@ -49,6 +43,17 @@ class MultiSwitch(BaseEntity):
 
     def __init__(self, data):
         BaseEntity.__init__(self, data)
+        self.ip = data['e_ip']
+        self.entity_id = data['entity_id']
+        self.name = data['e_name']
+        self.sn = data['e_sn']
+        self.uname = data['e_uname']
+        self.passwd = data['e_passwd']
+        self.isSnmp = data['e_isSnmp']  # a bool
+        self.service = data['service']  # a list of service
+        self.caseid = data['caseid']
+        self.community_w = data['community_w']
+        self.community_r = data['community_r']
         if data.has_key('face'):
             self.face = data['face']  # value: inner ; outter ;
         self.dealer = factory.H3CActionFactory.H3CSwitch(self)

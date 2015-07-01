@@ -94,6 +94,7 @@ class BaseMsgHandler(object):
                             if gch.tag == 'link':
                                 dev['link'].append(gch.text)
                 self.devicelist.append(dev)
+        print self.__class__, self.devicelist
 
     def returnWithoutHandler(self):
         pass

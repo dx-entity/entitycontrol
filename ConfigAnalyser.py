@@ -21,7 +21,7 @@ class ConfigAnalyser:
         self.dbserver = cf.get('DB', 'ip')
         self.user = cf.get('DB', 'user')
         self.passwd = cf.get('DB', 'passwd')
-        self.db = cf.get('DB', 'passwd')
+        self.db = cf.get('DB', 'db')
         # nfs configuration
         self.nfsBaseDir = cf.get('NFS', 'basedir')
 
